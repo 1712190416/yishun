@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.dao.AppointmentInfoMapper">
+  <resultMap id="BaseResultMap" type="com.xue.pojo.po.AppointmentInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="camera_area" jdbcType="VARCHAR" property="cameraArea" />
+    <result column="explain" jdbcType="VARCHAR" property="explain" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+    <result column="get_invite" jdbcType="INTEGER" property="getInvite" />
+    <result column="img_list" jdbcType="VARCHAR" property="imgList" />
+    <result column="launch_time" jdbcType="VARCHAR" property="launchTime" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="read_number" jdbcType="INTEGER" property="readNumber" />
+    <result column="tag_list" jdbcType="VARCHAR" property="tagList" />
+    <result column="camera_time" jdbcType="VARCHAR" property="cameraTime" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from appointment_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.xue.pojo.po.AppointmentInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into appointment_info (account, avatar_url, camera_area, 
+      `explain`, gender, get_invite, 
+      img_list, launch_time, nick_name, 
+      price, read_number, tag_list, 
+      camera_time)
+    values (#{account,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{cameraArea,jdbcType=VARCHAR}, 
+      #{explain,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{getInvite,jdbcType=INTEGER}, 
+      #{imgList,jdbcType=VARCHAR}, #{launchTime,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{readNumber,jdbcType=INTEGER}, #{tagList,jdbcType=VARCHAR}, 
+      #{cameraTime,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.xue.pojo.po.AppointmentInfo">
+    update appointment_info
+    set account = #{account,jdbcType=VARCHAR},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      camera_area = #{cameraArea,jdbcType=VARCHAR},
+      `explain` = #{explain,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER},
+      get_invite = #{getInvite,jdbcType=INTEGER},
+      img_list = #{imgList,jdbcType=VARCHAR},
+      launch_time = #{launchTime,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      read_number = #{readNumber,jdbcType=INTEGER},
+      tag_list = #{tagList,jdbcType=VARCHAR},
+      camera_time = #{cameraTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, account, avatar_url, camera_area, `explain`, gender, get_invite, img_list, 
+    launch_time, nick_name, price, read_number, tag_list, camera_time
+    from appointment_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, account, avatar_url, camera_area, `explain`, gender, get_invite, img_list, 
+    launch_time, nick_name, price, read_number, tag_list, camera_time
+    from appointment_info
+  </select>
+
+  <select id="selectByAccount" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, account, avatar_url, camera_area, `explain`, gender, get_invite, img_list,
+    launch_time, nick_name, price, read_number, tag_list, camera_time
+    from appointment_info
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+
+
+  <select id="selectHot" resultMap="BaseResultMap">
+    select id, account, avatar_url, camera_area, `explain`, gender, get_invite, img_list,
+    launch_time, nick_name, price, read_number, tag_list, camera_time
+    from appointment_info
+    ORDER By RAND() LIMIT 3
+  </select>
+
+</mapper>

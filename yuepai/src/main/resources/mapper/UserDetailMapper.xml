@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.dao.UserDetailMapper">
+  <resultMap id="BaseResultMap" type="com.xue.pojo.po.UserDetail">
+    <id column="account" jdbcType="VARCHAR" property="account" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="auth" jdbcType="VARCHAR" property="auth" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="height" jdbcType="INTEGER" property="height" />
+    <result column="hobby" jdbcType="VARCHAR" property="hobby" />
+    <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="weight" jdbcType="VARCHAR" property="weight" />
+    <result column="avatar_url" jdbcType="VARCHAR" property="avatarUrl" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="gender" jdbcType="INTEGER" property="gender" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user_detail
+    where account = #{account,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.xue.pojo.po.UserDetail">
+    insert into user_detail (account, age, area, 
+      auth, birthday, city, 
+      height, hobby, phonenumber, 
+      province, weight, avatar_url, 
+      nick_name, gender)
+    values (#{account,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{area,jdbcType=VARCHAR}, 
+      #{auth,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{height,jdbcType=INTEGER}, #{hobby,jdbcType=VARCHAR}, #{phonenumber,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.xue.pojo.po.UserDetail">
+    update user_detail
+    set age = #{age,jdbcType=INTEGER},
+      area = #{area,jdbcType=VARCHAR},
+      auth = #{auth,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      height = #{height,jdbcType=INTEGER},
+      hobby = #{hobby,jdbcType=VARCHAR},
+      phonenumber = #{phonenumber,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      weight = #{weight,jdbcType=VARCHAR},
+      avatar_url = #{avatarUrl,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=INTEGER}
+    where account = #{account,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select account, age, area, auth, birthday, city, height, hobby, phonenumber, province, 
+    weight, avatar_url, nick_name, gender
+    from user_detail
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select account, age, area, auth, birthday, city, height, hobby, phonenumber, province, 
+    weight, avatar_url, nick_name, gender
+    from user_detail
+  </select>
+</mapper>

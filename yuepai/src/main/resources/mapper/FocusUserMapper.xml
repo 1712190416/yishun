@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xue.dao.FocusUserMapper">
+  <resultMap id="BaseResultMap" type="com.xue.pojo.po.FocusUser">
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="focus_account" jdbcType="VARCHAR" property="focusAccount" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xue.pojo.po.FocusUser">
+    insert into focus_user (account, focus_account)
+    values (#{account,jdbcType=VARCHAR}, #{focusAccount,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select account, focus_account
+    from focus_user
+  </select>
+
+  <select id="selectFocus" parameterType="java.lang.String" resultType="java.lang.String">
+    select focus_account
+    from focus_user
+    where account = #{account,jdbcType=VARCHAR}
+  </select>
+</mapper>
